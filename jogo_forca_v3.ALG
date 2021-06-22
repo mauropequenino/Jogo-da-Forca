@@ -1,15 +1,146 @@
-Algoritmo "Jodo da forca"
-// Disciplina   : [Linguagem e Lógica de Programação]
-// Professor   : Antonio Carlos Nicolodi
-// Descrição   : Aqui você descreve o que o programa faz! (função)
-// Autor(a)    : Nome do(a) aluno(a)
+Algoritmo "Jogo da Forca"
+// Disciplina   : [Lógica de Programação]
+// Professor   : Godinho Quissico
+// Descrição   : Jogo da Forca
+// Autor(a)    : Mauro Pequenino e Elton Mirona
 // Data atual  : 22-Jun-21
 Var
    // Seção de Declarações das variáveis
-   num_Aleatorio,num_Aleatorio_2,cmp,i,num_Tentativas,alternativa,num_Letras: inteiro
+   num_Aleatorio,num_Aleatorio_2,cmp,i,num_Tentativas,alternativa,num_Letras,erros: inteiro
    palavra1,palavra2,palavra3,palavra4,palavra5,vector_Letra_Palavra: vetor[1..20] de caracter
    tema_Escolhido,palavra_Escolhida,letra,aux,tentativa_Perigosa:caracter
-   acertou: logico
+   achou: logico
+
+procedimento ilustracao
+inicio
+   se erros = 0 entao
+      escreval("====================")
+      escreval("  ||               #")
+      escreval("  ||               #")
+      escreval("  ||               #")
+      escreval("  || ")
+      escreval("  || ")
+      escreval("  || ")
+      escreval("  || ")
+      escreval("  || ")
+      escreval("  || ")
+      escreval("  || ")
+      escreval("  || ")
+      escreval("  || ")
+      escreval("  || ")
+      escreval("=====")
+   senao
+      se erros = 1 entao
+         escreval("====================")
+         escreval("  ||               #")
+         escreval("  ||               #")
+         escreval("  ||              _#_")
+         escreval("  ||             /   \")
+         escreval("  ||             \___/ ")
+         escreval("  || ")
+         escreval("  || ")
+         escreval("  || ")
+         escreval("  || ")
+         escreval("  || ")
+         escreval("  || ")
+         escreval("  || ")
+         escreval("  || ")
+         escreval("=====")
+      senao
+         se erros = 2 entao
+            escreval("====================")
+            escreval("  ||               #")
+            escreval("  ||               #")
+            escreval("  ||              _#_")
+            escreval("  ||             /   \")
+            escreval("  ||             \___/ ")
+            escreval("  ||              /|")
+            escreval("  ||             / |")
+            escreval("  ||               |")
+            escreval("  ||               |")
+            escreval("  ||               ")
+            escreval("  || ")
+            escreval("  || ")
+            escreval("  || ")
+            escreval("=====")
+
+         senao
+            se erros = 3 entao
+               escreval("====================")
+               escreval("  ||               #")
+               escreval("  ||               #")
+               escreval("  ||              _#_")
+               escreval("  ||             /   \")
+               escreval("  ||             \___/ ")
+               escreval("  ||              /|\")
+               escreval("  ||             / | \")
+               escreval("  ||               |")
+               escreval("  ||               |")
+               escreval("  ||               ")
+               escreval("  || ")
+               escreval("  || ")
+               escreval("  || ")
+               escreval("=====")
+            senao
+               se erros = 4 entao
+                  escreval("====================")
+                  escreval("  ||               #")
+                  escreval("  ||               #")
+                  escreval("  ||              _#_")
+                  escreval("  ||             /   \")
+                  escreval("  ||             \___/ ")
+                  escreval("  ||              /|\")
+                  escreval("  ||             / | \")
+                  escreval("  ||               |")
+                  escreval("  ||               |")
+                  escreval("  ||              / ")
+                  escreval("  || ")
+                  escreval("  || ")
+                  escreval("  || ")
+                  escreval("=====")
+               senao
+                  se erros = 5 entao
+                     escreval("====================")
+                     escreval("  ||               #")
+                     escreval("  ||               #")
+                     escreval("  ||              _#_")
+                     escreval("  ||             /   \")
+                     escreval("  ||             \___/ ")
+                     escreval("  ||              /|\")
+                     escreval("  ||             / | \")
+                     escreval("  ||               |")
+                     escreval("  ||               |")
+                     escreval("  ||              / \")
+                     escreval("  || ")
+                     escreval("  || ")
+                     escreval("  || ")
+                     escreval("=====")
+                  senao
+                     se erros = 6 entao
+                        escreval("====================")
+                        escreval("  ||               #")
+                        escreval("  ||               #")
+                        escreval("  ||               #")
+                        escreval("  ||              _#_")
+                        escreval("  ||             /   \")
+                        escreval("  ||             \___/ ")
+                        escreval("  ||              /|\")
+                        escreval("  ||             / | \")
+                        escreval("  ||               |")
+                        escreval("  ||               |")
+                        escreval("  ||              / \")
+                        escreval("  || ")
+                        escreval("  || ")
+                        escreval("  || ")
+                        escreval("=====")
+                     fimse
+                  fimse
+               fimse
+            fimse
+         fimse
+      fimse
+   fimse
+fimprocedimento
 
 Inicio
    // Seção de Comandos, procedimento, funções, operadores, etc...
@@ -110,6 +241,9 @@ Inicio
 
    fimescolha
 
+
+   ilustracao()
+
    //GERAR TRACOS
    cmp <- compr(palavra_Escolhida)
 
@@ -138,7 +272,7 @@ Inicio
       limpatela
       escolha alternativa
       caso 1
-      //UMA LETRA DE CADA VEZ
+         //UMA LETRA DE CADA VEZ
          escreval("TEMA: ",tema_Escolhido)
          escreval("PALAVRA: ",palavra_Escolhida)
          escreval
@@ -162,6 +296,7 @@ Inicio
                timer 2000 on
                timer 0 off
             fimse
+
          fimpara
 
          para i de 1 ate cmp faca
@@ -169,42 +304,46 @@ Inicio
             se aux = letra entao
                num_letras <- num_letras + 1
                vector_Letra_Palavra[i] <- letra
+            senao
+               //em vez de contar uma vez apenas, ele conta muitas vezes
+               erros <- erros + 1
             fimse
          fimpara
-         
+
+
          //TERMINAR O JOGO QUNADO A PALAVRA FOR COMPLETADA
          se num_Letras = cmp  entao
-              limpatela
-              escreval("Parabens voce venceu o jogo!")
-              fimalgoritmo
-         fimse
-      caso 2
-           //TENTAITVA PERIGOSA
-         escreval("TEMA: ",tema_Escolhido)
-         escreval("PALAVRA: ",palavra_Escolhida)
-         escreval
-
-         para i de 1 ate cmp faca
-            escreva(vector_Letra_Palavra[i])
-         fimpara
-
-         escreval
-         escreval
-         escreval("Tente uma palavra: ")
-         leia(tentativa_Perigosa)
-
-         tentativa_Perigosa <- maiusc(tentativa_Perigosa)
-
-         //TERMINAR O JOGO
-         se tentativa_Perigosa = palavra_Escolhida entao
             limpatela
             escreval("Parabens voce venceu o jogo!")
-            fimalgoritmo
-         senao
-              limpatela
-              escreval("Voce perdeu, nao foi desta")
-              fimalgoritmo
-         fimse
+fimalgoritmo
+fimse
+caso 2
+   //TENTAITVA PERIGOSA
+   escreval("TEMA: ",tema_Escolhido)
+   escreval("PALAVRA: ",palavra_Escolhida)
+   escreval
+
+   para i de 1 ate cmp faca
+      escreva(vector_Letra_Palavra[i])
+   fimpara
+
+   escreval
+   escreval
+   escreval("Tente uma palavra: ")
+   leia(tentativa_Perigosa)
+
+   tentativa_Perigosa <- maiusc(tentativa_Perigosa)
+
+   //TERMINAR O JOGO
+   se tentativa_Perigosa = palavra_Escolhida entao
+      limpatela
+      escreval("Parabens voce venceu o jogo!")
+fimalgoritmo
+senao
+   limpatela
+   escreval("Voce perdeu, nao foi desta")
+fimalgoritmo
+fimse
 
 outrocaso
    escreva("ERRO 404")
