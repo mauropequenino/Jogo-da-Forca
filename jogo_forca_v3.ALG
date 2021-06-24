@@ -7,12 +7,12 @@ Algoritmo "Jogo da Forca"
 //usuario
 tipo estrutura_jogadores = registro
    nome:caracter
-   num_Vitorias,num_Derotas: inteiro
+   num_Vitorias,num_Derrotas: inteiro
 fimregistro
 
 Var
    // Seção de Declarações das variáveis
-   num_Aleatorio,num_Aleatorio_2,cmp,i,j,num_Tentativas,alternativa,num_Letras,erros, codigo_inicial, num_Jogadores: inteiro
+   num_Aleatorio,num_Aleatorio_2,cmp,i,j,num_Tentativas,alternativa,num_Letras,erros, codigo_inicial, num_Jogadores,jogar_novamente: inteiro
    palavra1,palavra2,palavra3,palavra4,palavra5,vector_Letra_Palavra: vetor[1..20] de caracter
    tema_Escolhido,palavra_Escolhida,letra,aux,tentativa_Perigosa,letra_errada:caracter
    acertou: logico
@@ -132,7 +132,7 @@ inicio
                         escreval("  ||               #")
                         escreval("  ||              _#_")
                         escreval("  ||             /   \")
-                        escreval("  ||             \___/ ")
+                        escreval("  ||             \___/              GAME OVER!")
                         escreval("  ||              /|\")
                         escreval("  ||             / | \")
                         escreval("  ||            /  |  \")
@@ -144,7 +144,8 @@ inicio
                         escreval("  || ")
                         escreval("  || ")
                         escreval("=====")
-                        escreval ("GAME OVER!")
+                        timer 4000 on
+                        timer 0 off
                      fimse
                   fimse
                fimse
@@ -169,7 +170,7 @@ inicio
          escreval
          escreval("Nome: ",jogadores[j].nome)
          escreval("Vitorias: ",jogadores[j].num_Vitorias)
-         escreval("Derotas: ",jogadores[j].num_Derotas)
+         escreval("Derrotas: ",jogadores[j].num_Derrotas)
          escreval
          escreval("-------------------------")
       fimpara
@@ -180,16 +181,19 @@ inicio
 fimprocedimento
 
 Inicio
-   escreval("=====================================")
-   escreval("========== JOGO DA FORCA ============")
-   escreval("=====================================")
+   escreval("==================================================================")
+   escreval("=======================     BEM VINDO     ========================")
+   escreval("=======================        AO         ========================")
+   escreval("=======================   JOGO DA FORCA   ========================")
+   escreval("==================================================================")
    escreval
    escreval
-   escreval("Vamos Jogar?")
+   escreval("                           Vamos Jogar?")
    escreval
    escreval("[1] - Comecar o jogo")
    escreval("[2] - Ver Ranking")
    escreval("[0] - Sair")
+   escreval
    leia(codigo_inicial)
    limpatela
 
@@ -208,9 +212,11 @@ Inicio
          escreva("Insira o seu nome: ")
          leia(jogadores[j].nome)
 
+         jogadores[j].nome <- maiusc(jogadores[j].nome)
+
          //os jogadores inciam o jogo com 0 pontos
          jogadores[j].num_Vitorias <- 0
-         jogadores[j].num_Derotas <- 0
+         jogadores[j].num_Derrotas <- 0
          escreval
       fimpara
       limpatela
@@ -218,12 +224,14 @@ Inicio
       // Seção de Comandos, procedimento, funções, operadores, etc...
       para j de 1 ate num_Jogadores faca
 
+         //Gerar tema
          num_Aleatorio <- randi(5)
          se num_Aleatorio = 0 entao
             num_Aleatorio <- num_Aleatorio + 1
 
          fimse
 
+         //Gerar palavra
          num_Aleatorio_2 <- randi(10)
          se num_Aleatorio_2 = 0 entao
             num_Aleatorio_2 <- num_Aleatorio_2 + 1
@@ -307,7 +315,6 @@ Inicio
 
          outrocaso
             escreva("ERRO!")
-
          fimescolha
 
          //GERAR TRACOS
@@ -325,11 +332,12 @@ Inicio
 
             escreval()
 
-            ilustracao // desenha o boneco
+            ilustracao // DESEENHAR BONECO
 
+            escreval
             escreval("TEMA: ",tema_Escolhido)
             escreval("PALAVRA: ",palavra_Escolhida)
-            escreval("Letra Erradas: ")
+            escreval("Letra Erradas: ",letra_errada)
 
 
             para i de 1 ate cmp faca
@@ -349,9 +357,10 @@ Inicio
             caso 1
                escreval("Jogador ",j,": ",jogadores.nome[j])
 
-               ilustracao // desenha o boneco
+               ilustracao // DESENHAR BONECO
 
                //UMA LETRA DE CADA VEZ
+               escreval
                escreval("TEMA: ",tema_Escolhido)
                escreval("PALAVRA: ",palavra_Escolhida)
                escreval("Letra Erradas: ",letra_errada)
@@ -362,7 +371,7 @@ Inicio
 
                escreval
                escreval
-               escreval("Tente uma letra: ")
+               escreva("Tente uma letra: ")
                leia(letra)
                letra <- maiusc(letra)
 
@@ -378,6 +387,7 @@ Inicio
 
                fimpara
 
+               //LETRAS CERTAS
                para i de 1 ate cmp faca
                   aux <- copia(palavra_Escolhida,i,1)
                   se aux = letra entao
@@ -386,6 +396,8 @@ Inicio
                      vector_Letra_Palavra[i] <- letra
                   fimse
                fimpara
+
+               //LETRAS ERRADAS
                se acertou = falso entao
                   erros <- erros + 1
                   letra_errada <- letra_errada + letra
@@ -397,28 +409,29 @@ Inicio
                   timer 1000 on
                   timer 0 off
 
-                  ilustracao // desenha o boneco
+                  ilustracao // DESENHA BONECO
 
-                  jogadores[j].num_Derotas <- jogadores[j].num_Derotas + 1
+                  jogadores[j].num_Derrotas <- jogadores[j].num_Derrotas + 1
                   escreval("Voce perdeu, nao foi desta")
                   interrompa
-                  //fimalgoritmo
+                  //TERMINA O JOGO
                fimse
 
 
-               //TERMINAR O JOGO QUAnDO A PALAVRA FOR COMPLETADA
+               //TERMINAR O JOGO QUANDO A PALAVRA FOR COMPLETADA
                se num_Letras = cmp  entao
                   limpatela
                   jogadores[j].num_Vitorias <- jogadores[j].num_Vitorias + 1
                   escreval("Parabens voce venceu o jogo!")
                   interrompa
-                  //fimalgoritmo
+                  //TERMINA O JOGO
                fimse
 
                limpatela
             caso 2
                escreval("Jogador ",j,": ",jogadores.nome[j])
-               ilustracao // desenha o boneco
+
+               ilustracao // DESENHA BONECO
 
                //TENTATiVA PERIGOSA
                escreval("TEMA: ",tema_Escolhido)
@@ -442,34 +455,32 @@ Inicio
                   jogadores[j].num_Vitorias <- jogadores[j].num_Vitorias + 1
                   escreval("Parabens voce venceu o jogo!")
                   interrompa
-                  //fimalgoritmo
                senao
                   limpatela
                   erros <- 6
-                  ilustracao // desenha o boneco
-                  jogadores[j].num_Derotas <- jogadores[j].num_Derotas + 1
+                  ilustracao // DESENHA BONCECO
+                  jogadores[j].num_Derrotas <- jogadores[j].num_Derrotas + 1
                   escreval("Voce perdeu, nao foi desta")
                   interrompa
-                  //fimalgoritmo
                fimse
                limpatela
             outrocaso
-               escreva("ERRO 404")
+               escreva("Comando invalido")
                timer 1000 on
                timer 0 off
             fimescolha
          fimenquanto
-      fimpara
+   fimpara
 
-      //MOSTRAR RANKING
-      ranking
-   caso 2
-      //MOSTRAR RANKING
-      ranking
-   caso 0
+   //VOLTAR A JOGAR
+   ranking
+caso 2
+   //MOSTRAR RANKING
+   ranking
+caso 0
 
 fimalgoritmo
 outrocaso
-   escreva ("ERRO 404 ")
+   escreva ("Comando invalido")
 fimescolha
 Fimalgoritmo
