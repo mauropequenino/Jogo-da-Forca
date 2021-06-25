@@ -7,12 +7,12 @@ Algoritmo "Jogo da Forca"
 //usuario
 tipo estrutura_jogadores = registro
    nome:caracter
-   num_Vitorias,num_Derrotas: inteiro
+   num_Victorias,num_Derrotas: inteiro
 fimregistro
 
 Var
    // Seção de Declarações das variáveis
-   num_Aleatorio,num_Aleatorio_2,cmp,i,j,num_Tentativas,alternativa,num_Letras,erros, codigo_inicial, num_Jogadores,jogar_novamente: inteiro
+   num_Aleatorio,num_Aleatorio_2,cmp,i,j,num_Tentativas,alternativa,num_Letras,erros, codigo_inicial, num_Jogadores,num_Partidas,jogar_novamente: inteiro
    palavra1,palavra2,palavra3,palavra4,palavra5,vector_Letra_Palavra: vetor[1..20] de caracter
    tema_Escolhido,palavra_Escolhida,letra,aux,tentativa_Perigosa,letra_errada:caracter
    acertou: logico
@@ -165,17 +165,14 @@ inicio
    escreval
 
    se num_Jogadores <> 0 entao
-      escreval("Jogadores: ")
+      escreval("      JOGADORES        |     VICTORIAS         |     DERROTAS   ")
       para j de 1 ate num_Jogadores faca
          escreval
-         escreval("Nome: ",jogadores[j].nome)
-         escreval("Vitorias: ",jogadores[j].num_Vitorias)
-         escreval("Derrotas: ",jogadores[j].num_Derrotas)
+         escreva(j," - ",jogadores[j].nome,"                          ",jogadores[j].num_Vitorias,"                     ",jogadores[j].num_Derrotas)
          escreval
-         escreval("-------------------------")
+         escreval("------------------------------------------------------------")
       fimpara
    senao
-
       escreval("                          Sem resultados                       ")
    fimse
 fimprocedimento
@@ -201,8 +198,11 @@ Inicio
 
    caso 1
 
-      escreva("Quantos jogadores vao participar ? (Maximo 5 jogadores): ")
+      escreva("Numero de participantes (Maximo 5 jogadores): ")
       leia(num_Jogadores)
+      escreva("Numero de partidas: ")
+      leia(num_Partidas)
+
       limpatela
 
       //Inserir dados do jogador
@@ -222,264 +222,265 @@ Inicio
       limpatela
 
       // Seção de Comandos, procedimento, funções, operadores, etc...
-      para j de 1 ate num_Jogadores faca
+      para j de 1 ate num_Partidas faca
+         para j de 1 ate num_Jogadores faca
+            //Gerar tema
+            num_Aleatorio <- randi(5)
+            se num_Aleatorio = 0 entao
+               num_Aleatorio <- num_Aleatorio + 1
 
-         //Gerar tema
-         num_Aleatorio <- randi(5)
-         se num_Aleatorio = 0 entao
-            num_Aleatorio <- num_Aleatorio + 1
+            fimse
 
-         fimse
+            //Gerar palavra
+            num_Aleatorio_2 <- randi(10)
+            se num_Aleatorio_2 = 0 entao
+               num_Aleatorio_2 <- num_Aleatorio_2 + 1
+            fimse
 
-         //Gerar palavra
-         num_Aleatorio_2 <- randi(10)
-         se num_Aleatorio_2 = 0 entao
-            num_Aleatorio_2 <- num_Aleatorio_2 + 1
-         fimse
+            escolha num_Aleatorio
+            caso 1
+               tema_Escolhido <- "MUSICA"
+               palavra1[1] <- "ADELE"
+               palavra1[2] <- "HERNANI"
+               palavra1[3] <- "AZAGAIA"
+               palavra1[4] <- "MINGAS"
+               palavra1[5] <- "NEYMA"
+               palavra1[6] <- "COLDPLAY"
+               palavra1[7] <- "BEYONCE"
+               palavra1[8] <- "WAZIMBO"
+               palavra1[9] <- "LILOCA"
+               palavra1[10] <- "ALCIONE"
 
-         escolha num_Aleatorio
-         caso 1
-            tema_Escolhido <- "MUSICA"
-            palavra1[1] <- "ADELE"
-            palavra1[2] <- "HERNANI"
-            palavra1[3] <- "AZAGAIA"
-            palavra1[4] <- "MINGAS"
-            palavra1[5] <- "NEYMA"
-            palavra1[6] <- "COLDPLAY"
-            palavra1[7] <- "BEYONCE"
-            palavra1[8] <- "WAZIMBO"
-            palavra1[9] <- "LILOCA"
-            palavra1[10] <- "ALCIONE"
+               palavra_Escolhida <- palavra1[num_Aleatorio_2]
 
-            palavra_Escolhida <- palavra1[num_Aleatorio_2]
+            caso 2
+               tema_Escolhido <- "FILMES"
+               palavra2[1] <- "ROBOCOP"
+               palavra2[2] <- "AVENGERS"
+               palavra2[3] <- "AVATAR"
+               palavra2[4] <- "EXTERMINADOR"
+               palavra2[5] <- "TITANIC"
+               palavra2[6] <- "POCAHONTAS"
+               palavra2[7] <- "SOUL"
+               palavra2[8] <- "LUCA"
+               palavra2[9] <- "POMPEI"
+               palavra2[10] <- "XMEN"
 
-         caso 2
-            tema_Escolhido <- "FILMES"
-            palavra2[1] <- "ROBOCOP"
-            palavra2[2] <- "AVENGERS"
-            palavra2[3] <- "AVATAR"
-            palavra2[4] <- "EXTERMINADOR"
-            palavra2[5] <- "TITANIC"
-            palavra2[6] <- "POCAHONTAS"
-            palavra2[7] <- "SOUL"
-            palavra2[8] <- "LUCA"
-            palavra2[9] <- "POMPEI"
-            palavra2[10] <- "XMEN"
+               palavra_Escolhida <- palavra2[num_Aleatorio_2]
 
-            palavra_Escolhida <- palavra2[num_Aleatorio_2]
+            caso 3
+               tema_Escolhido <- "PERSONAGENS"
+               palavra3[1] <- "LARACROFT"
+               Palavra3[2] <- "DRACULA"
+               Palavra3[3] <- "BATMAN"
+               Palavra3[4] <- "THOR"
+               Palavra3[5]<- "JOKER"
+               Palavra3[6]<- "SUPERMAN"
+               palavra3[7] <- "SIMBA"
+               palavra3[8] <- "MUFASA"
+               palavra3[9] <- "TARZAN"
+               palavra3[10] <- "GREEN"
 
-         caso 3
-            tema_Escolhido <- "PERSONAGENS"
-            palavra3[1] <- "LARACROFT"
-            Palavra3[2] <- "DRACULA"
-            Palavra3[3] <- "BATMAN"
-            Palavra3[4] <- "THOR"
-            Palavra3[5]<- "JOKER"
-            Palavra3[6]<- "SUPERMAN"
-            palavra3[7] <- "SIMBA"
-            palavra3[8] <- "MUFASA"
-            palavra3[9] <- "TARZAN"
-            palavra3[10] <- "GREEN"
+               palavra_Escolhida <- palavra3[num_Aleatorio_2]
 
-            palavra_Escolhida <- palavra3[num_Aleatorio_2]
+            caso 4
+               tema_Escolhido <-"GEOGRAFIA"
+               palavra4[1] <- "MOCAMBIQUE"
+               palavra4[2] <- "BEIRA"
+               palavra4[3] <- "ESTOCOLMO"
+               palavra4[4] <- "NAMPULA"
+               palavra4[5] <- "LISBOA"
+               palavra4[6] <- "ANTANANARIVO"
+               palavra4[7] <- "BANGLADESH"
+               palavra4[8] <- "MAPUTO"
+               palavra4[9] <- "BAZARUTO"
+               palavra4[10] <- "PRETORIA"
 
-         caso 4
-            tema_Escolhido <-"GEOGRAFIA"
-            palavra4[1] <- "MOCAMBIQUE"
-            palavra4[2] <- "BEIRA"
-            palavra4[3] <- "ESTOCOLMO"
-            palavra4[4] <- "NAMPULA"
-            palavra4[5] <- "LISBOA"
-            palavra4[6] <- "ANTANANARIVO"
-            palavra4[7] <- "BANGLADESH"
-            palavra4[8] <- "MAPUTO"
-            palavra4[9] <- "BAZARUTO"
-            palavra4[10] <- "PRETORIA"
+               palavra_Escolhida <- palavra4[num_Aleatorio_2]
 
-            palavra_Escolhida <- palavra4[num_Aleatorio_2]
+            caso 5
+               tema_Escolhido <-"EQUIPAS DE DESPORTO"
+               palavra5[1] <- "BENFICA"
+               palavra5[2] <- "BARCELONA"
+               palavra5[3] <- "CHELSEA"
+               palavra5[4] <- "LAKERS"
+               palavra5[5] <- "DESPORTIVO"
+               palavra5[6] <- "MAXAQUENE"
+               palavra5[7] <- "ARSENAL"
+               palavra5[8] <- "CLIPPERS"
+               palavra5[9] <- "FERROVIARIO"
+               palavra5[10] <- "LIVERPOOL"
 
-         caso 5
-            tema_Escolhido <-"EQUIPAS DE DESPORTO"
-            palavra5[1] <- "BENFICA"
-            palavra5[2] <- "BARCELONA"
-            palavra5[3] <- "CHELSEA"
-            palavra5[4] <- "LAKERS"
-            palavra5[5] <- "DESPORTIVO"
-            palavra5[6] <- "MAXAQUENE"
-            palavra5[7] <- "ARSENAL"
-            palavra5[8] <- "CLIPPERS"
-            palavra5[9] <- "FERROVIARIO"
-            palavra5[10] <- "LIVERPOOL"
+               palavra_Escolhida <- palavra5[num_Aleatorio_2]
 
-            palavra_Escolhida <- palavra5[num_Aleatorio_2]
+            outrocaso
+               escreva("ERRO!")
+            fimescolha
 
-         outrocaso
-            escreva("ERRO!")
-         fimescolha
-
-         //GERAR TRACOS
-         cmp <- compr(palavra_Escolhida)
-
-         para i de 1 ate cmp faca
-            vector_Letra_Palavra[i] <- ("_ ")
-         fimpara
-
-         num_Tentativas <- 1
-
-         enquanto num_Tentativas < (cmp) faca
-            acertou <- falso
-            escreval("Jogador ",j,": ",jogadores.nome[j])
-
-            escreval()
-
-            ilustracao // DESEENHAR BONECO
-
-            escreval
-            escreval("TEMA: ",tema_Escolhido)
-            escreval("PALAVRA: ",palavra_Escolhida)
-            escreval("Letra Erradas: ",letra_errada)
-
+            //GERAR TRACOS
+            cmp <- compr(palavra_Escolhida)
 
             para i de 1 ate cmp faca
-               escreva(vector_Letra_Palavra[i])
+               vector_Letra_Palavra[i] <- ("_ ")
             fimpara
 
-            escreval
-            escreval
-            escreval("[1] - Inserir uma letra ")
-            escreval("[2] - Tentativa perigorsa ")
-            escreval
+            num_Tentativas <- 1
 
-            leia(alternativa)
-
-            limpatela
-            escolha alternativa
-            caso 1
+            enquanto num_Tentativas < (cmp) faca
+               acertou <- falso
                escreval("Jogador ",j,": ",jogadores.nome[j])
 
-               ilustracao // DESENHAR BONECO
+               escreval()
 
-               //UMA LETRA DE CADA VEZ
+               ilustracao // DESEENHAR BONECO
+
                escreval
                escreval("TEMA: ",tema_Escolhido)
                escreval("PALAVRA: ",palavra_Escolhida)
                escreval("Letra Erradas: ",letra_errada)
 
+
                para i de 1 ate cmp faca
                   escreva(vector_Letra_Palavra[i])
                fimpara
 
                escreval
                escreval
-               escreva("Tente uma letra: ")
-               leia(letra)
-               letra <- maiusc(letra)
+               escreval("[1] - Inserir uma letra ")
+               escreval("[2] - Tentativa perigorsa ")
+               escreval
 
-               //LETRAS JA INSERIDAS
-               para i de 1 ate cmp faca
-                  se letra = vector_Letra_Palavra[i] entao
-                     escreval
-                     escreval("Voce ja inseriu esta letra")
-                     escreval
+               leia(alternativa)
+
+               limpatela
+               escolha alternativa
+               caso 1
+                  escreval("Jogador ",j,": ",jogadores.nome[j])
+
+                  ilustracao // DESENHAR BONECO
+
+                  //UMA LETRA DE CADA VEZ
+                  escreval
+                  escreval("TEMA: ",tema_Escolhido)
+                  escreval("PALAVRA: ",palavra_Escolhida)
+                  escreval("Letra Erradas: ",letra_errada)
+
+                  para i de 1 ate cmp faca
+                     escreva(vector_Letra_Palavra[i])
+                  fimpara
+
+                  escreval
+                  escreval
+                  escreva("Tente uma letra: ")
+                  leia(letra)
+                  letra <- maiusc(letra)
+
+                  //LETRAS JA INSERIDAS
+                  para i de 1 ate cmp faca
+                     se (letra = vector_Letra_Palavra[i]) ou (letra_errada = letra) entao
+                        escreval
+                        escreval("Voce ja inseriu esta letra")
+                        escreval
+                        timer 1000 on
+                        timer 0 off
+                     fimse
+                     interrompa
+                  fimpara
+
+                  //LETRAS CERTAS
+                  para i de 1 ate cmp faca
+                     aux <- copia(palavra_Escolhida,i,1)
+                     se aux = letra entao
+                        num_letras <- num_letras + 1
+                        acertou <- verdadeiro
+                        vector_Letra_Palavra[i] <- letra
+                     fimse
+                  fimpara
+
+                  //LETRAS ERRADAS
+                  se (acertou = falso) e (letra_errada <> letra) entao
+                     erros <- erros + 1
+                     letra_errada <- letra_errada + letra
+                     escreva(letra_errada)
+                  fimse
+
+                  se erros = 6 entao
+                     limpatela
                      timer 1000 on
                      timer 0 off
+
+                     ilustracao // DESENHA BONECO
+
+                     jogadores[j].num_Derrotas <- jogadores[j].num_Derrotas + 1
+                     escreval("Voce perdeu, nao foi desta")
+                     timer 2000 on
+                     timer 0 off
+                     interrompa
+                     //TERMINA O JOGO
                   fimse
 
-               fimpara
 
-               //LETRAS CERTAS
-               para i de 1 ate cmp faca
-                  aux <- copia(palavra_Escolhida,i,1)
-                  se aux = letra entao
-                     num_letras <- num_letras + 1
-                     acertou <- verdadeiro
-                     vector_Letra_Palavra[i] <- letra
+                  //TERMINAR O JOGO QUANDO A PALAVRA FOR COMPLETADA
+                  se num_Letras = cmp  entao
+                     limpatela
+                     jogadores[j].num_Victorias <- jogadores[j].num_Vitorias + 1
+                     escreval("Parabens voce venceu o jogo!")
+                     timer 2000 on
+                     timer 0 off
+                     interrompa
+                     //TERMINA O JOGO
                   fimse
-               fimpara
 
-               //LETRAS ERRADAS
-               se acertou = falso entao
-                  erros <- erros + 1
-                  letra_errada <- letra_errada + letra
-                  escreva(letra_errada)
-               fimse
-
-               se erros = 6 entao
                   limpatela
-                  timer 1000 on
-                  timer 0 off
+               caso 2
+                  escreval("Jogador ",j,": ",jogadores.nome[j])
 
                   ilustracao // DESENHA BONECO
 
-                  jogadores[j].num_Derrotas <- jogadores[j].num_Derrotas + 1
-                  escreval("Voce perdeu, nao foi desta")
-                  timer 2000 on
-                  timer 0 off
-                  interrompa
-                  //TERMINA O JOGO
-               fimse
+                  //TENTATiVA PERIGOSA
+                  escreval("TEMA: ",tema_Escolhido)
+                  escreval("PALAVRA: ",palavra_Escolhida)
+                  escreval
 
+                  para i de 1 ate cmp faca
+                     escreva(vector_Letra_Palavra[i])
+                  fimpara
 
-               //TERMINAR O JOGO QUANDO A PALAVRA FOR COMPLETADA
-               se num_Letras = cmp  entao
+                  escreval
+                  escreval
+                  escreval("Tente uma palavra: ")
+                  leia(tentativa_Perigosa)
+
+                  tentativa_Perigosa <- maiusc(tentativa_Perigosa)
+
+                  //TERMINAR O JOGOo
+                  se tentativa_Perigosa = palavra_Escolhida entao
+                     limpatela
+                     jogadores[j].num_Victorias <- jogadores[j].num_Victorias + 1
+                     escreval("Parabens voce venceu o jogo!")
+                     timer 2000 on
+                     timer 0 off
+                     interrompa
+                  senao
+                     limpatela
+                     erros <- 6
+                     ilustracao // DESENHA BONCECO
+                     jogadores[j].num_Derrotas <- jogadores[j].num_Derrotas + 1
+                     interrompa
+                  fimse
                   limpatela
-                  jogadores[j].num_Vitorias <- jogadores[j].num_Vitorias + 1
-                  escreval("Parabens voce venceu o jogo!")
-                  timer 2000 on
+               outrocaso
+                  escreva("Comando invalido")
+                  timer 1000 on
                   timer 0 off
-                  interrompa
-                  //TERMINA O JOGO
-               fimse
-
-               limpatela
-            caso 2
-               escreval("Jogador ",j,": ",jogadores.nome[j])
-
-               ilustracao // DESENHA BONECO
-
-               //TENTATiVA PERIGOSA
-               escreval("TEMA: ",tema_Escolhido)
-               escreval("PALAVRA: ",palavra_Escolhida)
-               escreval
-
-               para i de 1 ate cmp faca
-                  escreva(vector_Letra_Palavra[i])
-               fimpara
-
-               escreval
-               escreval
-               escreval("Tente uma palavra: ")
-               leia(tentativa_Perigosa)
-
-               tentativa_Perigosa <- maiusc(tentativa_Perigosa)
-
-               //TERMINAR O JOGOo
-               se tentativa_Perigosa = palavra_Escolhida entao
-                  limpatela
-                  jogadores[j].num_Vitorias <- jogadores[j].num_Vitorias + 1
-                  escreval("Parabens voce venceu o jogo!")
-                  timer 2000 on
-                  timer 0 off
-                  interrompa
-               senao
-                  limpatela
-                  erros <- 6
-                  ilustracao // DESENHA BONCECO
-                  jogadores[j].num_Derrotas <- jogadores[j].num_Derrotas + 1
-                  interrompa
-               fimse
-               limpatela
-            outrocaso
-               escreva("Comando invalido")
-               timer 1000 on
+               fimescolha
+               timer 2000 on
                timer 0 off
-            fimescolha
-            timer 2000 on
-            timer 0 off
-         fimenquanto
-         erros <- 0
-         cmp <- 0
-         num_tentativas <- 0
+            fimenquanto
+            erros <- 0
+            cmp <- 0
+            num_tentativas <- 0
+         fimpara
       fimpara
 
       //VOLTAR A JOGAR
