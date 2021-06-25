@@ -453,7 +453,7 @@ Inicio
 
                tentativa_Perigosa <- maiusc(tentativa_Perigosa)
 
-               //TERMINAR O JOGO
+               //TERMINAR O JOGOo
                se tentativa_Perigosa = palavra_Escolhida entao
                   limpatela
                   jogadores[j].num_Vitorias <- jogadores[j].num_Vitorias + 1
