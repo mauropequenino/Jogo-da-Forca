@@ -413,6 +413,8 @@ Inicio
 
                   jogadores[j].num_Derrotas <- jogadores[j].num_Derrotas + 1
                   escreval("Voce perdeu, nao foi desta")
+                  timer 2000 on
+                  timer 0 off
                   interrompa
                   //TERMINA O JOGO
                fimse
@@ -423,6 +425,8 @@ Inicio
                   limpatela
                   jogadores[j].num_Vitorias <- jogadores[j].num_Vitorias + 1
                   escreval("Parabens voce venceu o jogo!")
+                  timer 2000 on
+                  timer 0 off
                   interrompa
                   //TERMINA O JOGO
                fimse
@@ -454,13 +458,14 @@ Inicio
                   limpatela
                   jogadores[j].num_Vitorias <- jogadores[j].num_Vitorias + 1
                   escreval("Parabens voce venceu o jogo!")
+                  timer 2000 on
+                  timer 0 off
                   interrompa
                senao
                   limpatela
                   erros <- 6
                   ilustracao // DESENHA BONCECO
                   jogadores[j].num_Derrotas <- jogadores[j].num_Derrotas + 1
-                  escreval("Voce perdeu, nao foi desta")
                   interrompa
                fimse
                limpatela
@@ -469,15 +474,20 @@ Inicio
                timer 1000 on
                timer 0 off
             fimescolha
+            timer 2000 on
+            timer 0 off
          fimenquanto
-   fimpara
+         erros <- 0
+         cmp <- 0
+         num_tentativas <- 0
+      fimpara
 
-   //VOLTAR A JOGAR
-   ranking
-caso 2
-   //MOSTRAR RANKING
-   ranking
-caso 0
+      //VOLTAR A JOGAR
+      ranking
+   caso 2
+      //MOSTRAR RANKING
+      ranking
+   caso 0
 
 fimalgoritmo
 outrocaso
