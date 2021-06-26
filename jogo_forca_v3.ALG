@@ -134,7 +134,7 @@ inicio
                         escreval("  ||             /   \")
                         escreval("  ||             \___/            GAME OVER!")
                         escreval("  ||              /|\")
-                        escreval("  ||             / | \")
+                        escreval("  ||             / | \          Nao foi desta!")
                         escreval("  ||            /  |  \")
                         escreval("  ||               |   ")
                         escreval("  ||               |")
@@ -196,12 +196,13 @@ Inicio
 
    jogo <- verdadeiro
 
-   // ver a ultima linha deste laco
-   //reinicia o jogo
+   //INICIA E REINICIA O JOGO
    enquanto jogo = verdadeiro faca
 
       escolha codigo_inicial
       caso 1
+
+         //DADOS DOS JOGADORES
          escreva("Numero de participantes (Maximo 5 jogadores): ")
          leia(num_Jogadores)
          escreva("Numero de partidas: ")
@@ -209,7 +210,6 @@ Inicio
 
          limpatela
 
-         //Inserir dados do jogador
          para j de 1 ate num_Jogadores faca
             escreva("Jogador:",j)
             escreval
@@ -217,25 +217,25 @@ Inicio
             leia(jogadores[j].nome)
 
             jogadores[j].nome <- maiusc(jogadores[j].nome)
-
-            //os jogadores inciam o jogo com 0 pontos
             jogadores[j].num_Victorias <- 0
             jogadores[j].num_Derrotas <- 0
             escreval
          fimpara
          limpatela
 
-         // Seção de Comandos, procedimento, funções, operadores, etc...
-         para j de 1 ate num_Partidas faca
+
+         //DADOS DO JOGO
+         para k de 1 ate num_Partidas faca
             para j de 1 ate num_Jogadores faca
-               //Gerar tema
+
+               //GERAR TEMA
                num_Aleatorio <- randi(5)
                se num_Aleatorio = 0 entao
                   num_Aleatorio <- num_Aleatorio + 1
 
                fimse
 
-               //Gerar palavra
+               //GERAR PALAVRA
                num_Aleatorio_2 <- randi(10)
                se num_Aleatorio_2 = 0 entao
                   num_Aleatorio_2 <- num_Aleatorio_2 + 1
@@ -332,15 +332,13 @@ Inicio
 
                enquanto num_Tentativas < (cmp) faca
                   acertou <- falso
-                  escreval("Jogador ",j,": ",jogadores.nome[j])
-
-                  escreval()
+                  escreval("Partida: ",k," | Jogador ",j,": ",jogadores.nome[j])
+                  escreval("--------------------------------------------------")
 
                   ilustracao // DESEENHAR BONECO
 
                   escreval
                   escreval("Tema: ",tema_Escolhido)
-                  escreval("PALAVRA: ",palavra_Escolhida)
                   escreval("Letra Erradas: ",letra_errada)
 
 
@@ -359,14 +357,14 @@ Inicio
                   limpatela
                   escolha alternativa
                   caso 1
-                     escreval("Jogador ",j,": ",jogadores.nome[j])
+                     escreval("Partida: ",k," | Jogador ",j,": ",jogadores.nome[j])
+                     escreval("--------------------------------------------------")
 
                      ilustracao // DESENHAR BONECO
 
                      //UMA LETRA DE CADA VEZ
                      escreval
                      escreval("Tema: ",tema_Escolhido)
-                     escreval("PALAVRA: ",palavra_Escolhida)
                      escreval("Letra Erradas: ",letra_errada)
 
                      para i de 1 ate cmp faca
@@ -436,14 +434,15 @@ Inicio
                      fimse
 
                      limpatela
+
                   caso 2
-                     escreval("Jogador ",j,": ",jogadores.nome[j])
+                     escreval("Partida: ",k," | Jogador ",j,": ",jogadores.nome[j])
+                     escreval("--------------------------------------------------")
 
                      ilustracao // DESENHA BONECO
 
                      //TENTATiVA PERIGOSA
                      escreval("Tema: ",tema_Escolhido)
-                     escreval("PALAVRA: ",palavra_Escolhida)
                      escreval("Letra Erradas: ",letra_errada)
                      escreval
 
@@ -499,6 +498,7 @@ Inicio
          ranking
       caso 0
 fimalgoritmo
+
 outrocaso
    escreva ("Comando invalido")
 fimescolha
