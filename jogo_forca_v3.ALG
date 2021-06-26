@@ -132,7 +132,7 @@ inicio
                         escreval("  ||               #")
                         escreval("  ||              _#_")
                         escreval("  ||             /   \")
-                        escreval("  ||             \___/              GAME OVER!")
+                        escreval("  ||             \___/            GAME OVER!")
                         escreval("  ||              /|\")
                         escreval("  ||             / | \")
                         escreval("  ||            /  |  \")
