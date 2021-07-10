@@ -2,8 +2,11 @@ Algoritmo "Jogo da Forca"
 // Disciplina   : [Lógica de Programação]
 // Professor   : Godinho Quissico
 // Descrição   : Jogo da Forca
-// Autor(a)    : Mauro Pequenino e Elton Mirona
+// Turma      : 1P1LDS1
+// Aluno 1     : Elton Mirona
+// Aluno 2     : Mauro Pequenino
 // Data atual  : 22-Jun-21
+
 //usuario
 tipo estrutura_jogadores = registro
    nome:caracter
@@ -15,7 +18,7 @@ Var
    num_Aleatorio,num_Aleatorio_2,cmp,i,j,k,num_Tentativas,alternativa,num_Letras,erros, codigo_inicial, num_Jogadores,num_Partidas,jogar_novamente: inteiro
    palavra1,palavra2,palavra3,palavra4,palavra5,vector_Letra_Palavra: vetor[1..20] de caracter
    tema_Escolhido,palavra_Escolhida,letra,aux,tentativa_Perigosa,letra_errada:caracter
-   acertou,jogo: logico
+   acertou,jogo,verificar_letra: logico
    jogadores: vetor[1..5] de estrutura_jogadores
 
 procedimento ilustracao
@@ -126,6 +129,11 @@ inicio
                      escreval("=====")
                   senao
                      se erros = 6 entao
+                        escreval("Partida: ",k," | Jogador ",j,": ",jogadores.nome[j])
+                        escreval("--------------------------------------------------")
+                        escreval("Tema: ",tema_Escolhido)
+                        escreval("Palavra certa: ",palavra_Escolhida)
+                        escreval("--------------------------------------------------")
                         escreval("====================")
                         escreval("  ||               #")
                         escreval("  ||               #")
@@ -177,7 +185,8 @@ inicio
    fimse
 fimprocedimento
 
-Inicio
+procedimento home
+inicio
    escreval("==================================================================")
    escreval("=======================     BEM VINDO     ========================")
    escreval("=======================        AO         ========================")
@@ -193,10 +202,16 @@ Inicio
    escreval
    leia(codigo_inicial)
    limpatela
+fimprocedimento
+
+Inicio
+
+   //INICIO
+   home
 
    jogo <- verdadeiro
 
-   //INICIA E REINICIA O JOGO
+   //REINICIA O JOGO NO FIM DESDE LACO
    enquanto jogo = verdadeiro faca
 
       escolha codigo_inicial
@@ -243,7 +258,7 @@ Inicio
 
                escolha num_Aleatorio
                caso 1
-                  tema_Escolhido <- "MUSICA"
+                  tema_Escolhido <- "Artistas"
                   palavra1[1] <- "ADELE"
                   palavra1[2] <- "HERNANI"
                   palavra1[3] <- "AZAGAIA"
@@ -258,7 +273,7 @@ Inicio
                   palavra_Escolhida <- palavra1[num_Aleatorio_2]
 
                caso 2
-                  tema_Escolhido <- "FILMES"
+                  tema_Escolhido <- "Filmes"
                   palavra2[1] <- "ROBOCOP"
                   palavra2[2] <- "AVENGERS"
                   palavra2[3] <- "AVATAR"
@@ -273,7 +288,7 @@ Inicio
                   palavra_Escolhida <- palavra2[num_Aleatorio_2]
 
                caso 3
-                  tema_Escolhido <- "PERSONAGENS"
+                  tema_Escolhido <- "Personagens"
                   palavra3[1] <- "LARACROFT"
                   Palavra3[2] <- "DRACULA"
                   Palavra3[3] <- "BATMAN"
@@ -283,12 +298,12 @@ Inicio
                   palavra3[7] <- "SIMBA"
                   palavra3[8] <- "MUFASA"
                   palavra3[9] <- "TARZAN"
-                  palavra3[10] <- "GREEN"
+                  palavra3[10] <- "MULAN"
 
                   palavra_Escolhida <- palavra3[num_Aleatorio_2]
 
                caso 4
-                  tema_Escolhido <-"GEOGRAFIA"
+                  tema_Escolhido <-"Geografia"
                   palavra4[1] <- "MOCAMBIQUE"
                   palavra4[2] <- "BEIRA"
                   palavra4[3] <- "ESTOCOLMO"
@@ -330,7 +345,7 @@ Inicio
 
                num_Tentativas <- 1
 
-               enquanto num_Tentativas < (cmp) faca
+               enquanto num_Tentativas < cmp+50 faca
                   acertou <- falso
                   escreval("Partida: ",k," | Jogador ",j,": ",jogadores.nome[j])
                   escreval("--------------------------------------------------")
@@ -400,6 +415,7 @@ Inicio
                      fimpara
 
                      //LETRAS ERRADAS
+
                      se (acertou = falso) e (letra_errada <> letra) entao
                         erros <- erros + 1
                         letra_errada <- letra_errada + letra
@@ -414,7 +430,7 @@ Inicio
                         ilustracao // DESENHA BONECO
 
                         jogadores[j].num_Derrotas <- jogadores[j].num_Derrotas + 1
-                        escreval("Voce perdeu, nao foi desta")
+
                         timer 2000 on
                         timer 0 off
                         interrompa
@@ -478,8 +494,6 @@ Inicio
                      timer 1000 on
                      timer 0 off
                   fimescolha
-                  timer 2000 on
-                  timer 0 off
                fimenquanto
 
                //LIMPAR DADOS
@@ -506,21 +520,9 @@ fimescolha
 timer 5000 on
 timer 0 off
 limpatela
-escreval("==================================================================")
-escreval("=======================     BEM VINDO     ========================")
-escreval("=======================        AO         ========================")
-escreval("=======================   JOGO DA FORCA   ========================")
-escreval("==================================================================")
-escreval
-escreval
-escreval("                           Vamos Jogar?")
-escreval
-escreval("[1] - Comecar o jogo")
-escreval("[2] - Ver Ranking")
-escreval("[0] - Sair")
-escreval
-leia(codigo_inicial)
-limpatela
+
+home
+
 fimenquanto
 
 Fimalgoritmo
